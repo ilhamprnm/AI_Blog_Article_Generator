@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Log in</title>
+</head>
+<body>
+  <!-- Nav Bar -->
+  <nav class=" bg-blue-600 flex p-4 justify-between items-center">
+    <div>
+      <a href="" class="font-bold text-white text-3xl">AI Blog Generator</a>
+    </div>
+    <div class="flex gap-x-5">
+      <a href="login" class="text-white">Log In</a>
+      <a href="signup" class="text-white">Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- Main Section  -->
+  <form class="flex justify-center" action="" method="POST">
+    {% csrf_token %}
+
+    <div class="bg-white shadow-md rounded-md mt-8 mx-4 max-w-[500px] flex flex-grow flex-col gap-4 p-4">
+      
+      {% if error_message %}
+      <div class="mx-auto text-red-500">
+        <h2>
+          {{ error_message }}
+        </h2>
+      </div>
+      {% endif %}
+
+
+      <h2 class="text-2xl font-bold mb-3">Login</h2>
+
+      <div>
+        <label for="Username" class="block font-bold mb-1">Username</label>
+        <input class="border border-blue-100 w-full p-2 rounded-md" type="text" id="Username" name="username">
+      </div>
+
+      <div>
+        <label for="password" class="block font-bold mb-1">Password</label>
+        <input class="border border-blue-100 w-full p-2 rounded-md" type="password" id="password" name="password">
+      </div>
+      
+      <button class="bg-blue-500  text-white font-bold rounded-md p-2" type="submit">Log In</button>
+    </div>
+  </form>
+
+  <!-- Footer Section -->
+  <footer class="flex justify-center">
+    <div class="bg-white shadow-md rounded-md m-4 max-w-[500px] flex flex-grow justify-center p-4">
+      <p>Inspired By Tomi</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Blog Details</title>
+</head>
+<body>
+   <!-- Nav Bar -->
+   <nav class=" bg-blue-600 flex p-4 justify-between items-center">
+    <div>
+      <a href="" class="font-bold text-white text-3xl">AI Blog Generator</a>
+    </div>
+    <div class="flex gap-x-5">
+      <a href="#" class="text-white">Welcome {{user.username}}</a>
+      <a href="/blog-list" class="text-white">Saved Blog Posts</a>
+      <a href="/logout" class="text-white">logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Section  -->
+  <div class="flex justify-center ">
+    <div class="bg-white shadow-md rounded-md mt-8 mx-4 max-w-[700px] flex flex-grow flex-col gap-4 p-4">
+
+      <h2 class="text-2xl font-bold">Blog Post Details</h2>
+
+      <div class="border border-gray-300 rounded-md p-3 text-justify">
+        <h3 class="font-bold text-lg">{{blog_article_detail.youtube_title}}</h3>
+        <p>{{blog_article_detail.generated_content}}</p>
+        <hr class="my-2 border-gray-500">
+        <h4 class="font-bold">Youtube Title</h4>
+        <p class="mb-2">{{blog_article_detail.youtube_title}}</p>
+        <h4 class="font-bold">Youtube Link</h4>
+        <a href="{{blog_article_detail.youtube_link}}" target="_blank" class="underline text-blue-600">{{blog_article_detail.youtube_link}}</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="flex justify-center">
+    <div class="bg-white shadow-md rounded-md m-4 max-w-[700px] flex flex-grow justify-center p-4">
+      <p>Inspired By Tomi</p>
+    </div>
+  </footer>
+</body>
+</html>

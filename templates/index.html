@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>AI Blog Generator</title>
+
+  <style>
+        /* HTML: <div class="loader"></div> */
+    .loader {
+      width: 50px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 8px solid lightblue;
+      border-right-color: blue;
+      animation: l2 1s infinite linear;
+      margin:  20px auto 30px auto;
+    }
+    @keyframes l2 {to{transform: rotate(1turn)}}
+  </style>
+</head>
+<body class="bg-slate-100 font-sans">
+
+  <!-- Nav Bar -->
+  <nav class=" bg-blue-600 flex p-4 justify-between items-center">
+    <div>
+      <a href="" class="font-bold text-white text-3xl">AI Blog Generator</a>
+    </div>
+    <div class="flex gap-x-5">
+      <a href="#" class="text-white">Welcome {{user.username}}</a>
+      <a href="/blog-list" class="text-white">Saved Blog Posts</a>
+      <a href="/logout" class="text-white">logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Section  -->
+  <div class="flex justify-center ">
+    <div class="bg-white shadow-md rounded-md mt-8 mx-4 max-w-[700px] flex flex-grow flex-col p-4">
+
+      <!-- Description  -->
+      <div class=" flex flex-col text-center mb-4">
+        <h2 class="text-2xl font-bold mb-3">Welcome to the AI  Blog Generator</h2>
+        <p class="">Generate high-quality blog articles from Youtube videos using artificial intelligence. Simply enter the link to the Youtube video below and let the AI create the content for you!</p>
+      </div>
+
+      <!-- Youtube link -->
+      <div class="mb-4">
+        <h2 class="text-2xl font-bold mb-3">Enter Youtube Video Link</h2>
+        <div class="flex gap-2">
+          <input id="youtubeLink" type="text" class="h-10 w-4 p-2 flex-grow rounded-s-md border border-blue-100" placeholder="Input Youtube Link" >
+          <button id="generateBlogButton" class="bg-blue-600 text-white h-10 px-4 rounded-e-md">Generate</button>
+        </div>
+      </div>
+
+      <!-- Loading -->
+      <div id="loader" class="loader hidden">
+
+      </div>
+
+      <!-- Generated blog -->
+      <div>
+        <h2 class="text-2xl font-bold mb-3">Generated Blog Article</h2>
+        <div id="blogContent">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="flex justify-center">
+    <div class="bg-white shadow-md rounded-md m-4 max-w-[700px] flex flex-grow justify-center p-4">
+      <p>Inspired By Tomi</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('generateBlogButton').addEventListener('click', async () => {
+
+      const youtubeLink = document.getElementById('youtubeLink').value;
+      const blogContent = document.getElementById('blogContent');
+
+      if(youtubeLink) {
+        document.getElementById('loader').style.display = 'block';
+        
+        blogContent.innerHTML = ''; 
+
+        const endpointUrl = '/generate-blog';
+
+        try {
+          const response = await fetch(endpointUrl, {
+            method: 'POST',
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ link: youtubeLink })
+          });
+
+          const data = await response.json();
+
+          blogContent.innerHTML = data.content;
+          
+
+        } catch (error) {
+          console.error("Error occured:", error);
+          alert("Something went wrong. Please try again later.");
+        }
+        document.getElementById('loader').style.display = 'none';
+
+      } else {
+        alert("Please enter a Youtube link");
+      }
+    })
+  </script>
+</body>
+</html>
